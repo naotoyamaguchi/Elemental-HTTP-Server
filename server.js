@@ -28,10 +28,12 @@ const server = http.createServer( (req, res) => {
 
   req.setEncoding('utf8');
   req.on('data', (chunk) => {
+    console.log(chunk);
     parsedData = qs.parse(chunk);
   });
 
   req.on('end', () => {
+    console.log("hellooo", req.url)
     fs.writeFile(`./public/${parsedData.elementName}.html`, `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +58,7 @@ const server = http.createServer( (req, res) => {
       }
       for(let i = 0; i < myElementz.length; i++){
         updatedList+=`<li>
-        <a href="/${myElementz[i]}">${myElementz[i].slice(0, -5)}</a>
+        <a href="./${myElementz[i]}">${myElementz[i].slice(0, -5)}</a>
       </li>`;
         }
           fs.writeFile(`./public/index.html`, `<!DOCTYPE html>
